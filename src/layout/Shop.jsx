@@ -1,11 +1,40 @@
 import { useState, useEffect } from 'react';
 import { API_KEY, API_URL } from '../config';
 import { Preloader } from '../components/Preloader/Preloader';
-import { GoodsList } from '../components/GoodsList/GoodsList';
+import { GoodsList } from '../components/GoodsList/GoodsList'; 
+import { Cart } from '../components/Cart/Cart';
+
 
 const Shop = () => {
   const [goods, setGoods] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [order, setOrder] = useState([]);
+
+  const addTheGoods = (item) => {
+
+    const itemId = order.findIndex(orderItem => orderItem.id === item.id)
+    console.log(`itemId`, itemId)
+    if (itemId < 0) {
+      const newItem = {
+        ...item,
+        quantity : 1,
+      }
+      setOrder([...order, newItem])
+    }else{
+      const newOrder = order.map((orderItem, index) => {
+        if (index === itemId ) {
+          console.log(`index`, index)
+          return {
+            ...orderItem, 
+            quantity: orderItem.quantity + 1 
+          }
+        }else {
+          return orderItem
+        }
+      })
+      setOrder(newOrder)
+    }
+  }
 
   useEffect(function getGoods() {
     fetch(API_URL, {
@@ -15,8 +44,7 @@ const Shop = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.featured);
-        data.featured && setGoods(data.featured);         //data.shop && setItems(data.shop);
+        data.featured && setGoods(data.featured);
         setLoading(false);
       })
       .catch((error) => console.error(error));
@@ -24,7 +52,8 @@ const Shop = () => {
 
   return (
     <main className='container content'>
-      {loading ? <Preloader /> : <GoodsList goods={goods} />}
+      <Cart quantity={order.length} addTheGoods={addTheGoods} />
+      {loading ? <Preloader /> : <GoodsList goods={goods} addTheGoods={addTheGoods}/>}
     </main>
   );
 };
