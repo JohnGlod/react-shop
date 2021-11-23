@@ -1,45 +1,49 @@
 import { useState, useEffect } from 'react';
 import { API_KEY, API_URL } from '../config';
 import { Preloader } from '../components/Preloader/Preloader';
-import { GoodsList } from '../components/GoodsList/GoodsList'; 
+import { GoodsList } from '../components/GoodsList/GoodsList';
 import { Cart } from '../components/Cart/Cart';
-import { BasketList } from '../components/BasketList/BasketList'
+import { BasketList } from '../components/BasketList/BasketList';
 
 const Shop = () => {
   const [goods, setGoods] = useState([]);
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState([]);
-  const [isBasketShow, setBasketShow] = useState(false)
+  const [isBasketShow, setBasketShow] = useState(false);
 
   const handleBasketShow = () => {
-    setBasketShow(!isBasketShow)
-  }
+    setBasketShow(!isBasketShow);
+  };
 
-  const addTheGoods = (item) => {
-
-    const itemId = order.findIndex(orderItem => orderItem.id === item.id)
-    console.log(`itemId`, itemId)
+  const addToBasket = (item) => {
+    const itemId = order.findIndex((orderItem) => orderItem.id === item.id);
+    console.log(`itemId`, itemId);
     if (itemId < 0) {
       const newItem = {
         ...item,
-        quantity : 1,
-      }
-      setOrder([...order, newItem])
-    }else{
+        quantity: 1,
+      };
+      setOrder([...order, newItem]);
+    } else {
       const newOrder = order.map((orderItem, index) => {
-        if (index === itemId ) {
-          console.log(`index`, index)
+        if (index === itemId) {
+          console.log(`index`, index);
           return {
-            ...orderItem, 
-            quantity: orderItem.quantity + 1 
-          }
-        }else {
-          return orderItem
+            ...orderItem,
+            quantity: orderItem.quantity + 1,
+          };
+        } else {
+          return orderItem;
         }
-      })
-      setOrder(newOrder)
+      });
+      setOrder(newOrder);
     }
-  }
+  };
+
+  const removeFromBasket = (itemId) => {
+    const newOrder = order.filter((item) => item.id !== itemId);
+    setOrder(newOrder);
+  };
 
   useEffect(function getGoods() {
     fetch(API_URL, {
@@ -57,11 +61,23 @@ const Shop = () => {
 
   return (
     <main className='container content'>
-      <Cart quantity={order.length} addTheGoods={addTheGoods} handleBasketShow={handleBasketShow} />
-      {loading ? <Preloader /> : <GoodsList goods={goods} addTheGoods={addTheGoods}/>}
-      {
-        isBasketShow && <BasketList order={order} handleBasketShow={handleBasketShow} /> 
-      }
+      <Cart
+        quantity={order.length}
+        addToBasket={addToBasket}
+        handleBasketShow={handleBasketShow}
+      />
+      {loading ? (
+        <Preloader />
+      ) : (
+        <GoodsList goods={goods} addToBasket={addToBasket} />
+      )}
+      {isBasketShow && (
+        <BasketList
+          order={order}
+          handleBasketShow={handleBasketShow}
+          removeFromBasket={removeFromBasket}
+        />
+      )}
     </main>
   );
 };

@@ -8,7 +8,7 @@ const GoodsItem = (props) => {
     description,
     price,
     full_background, 
-    addTheGoods = Function.prototype 
+    addToBasket = Function.prototype 
   } = props
 
   return (
@@ -21,7 +21,7 @@ const GoodsItem = (props) => {
           <p>{description}</p>
         </div>
         <div className="card-action">
-          <button className="btn" onClick={() => addTheGoods({
+          <button className="btn" onClick={() => addToBasket({
             id, 
             name,
             price,

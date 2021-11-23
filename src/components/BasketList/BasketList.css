@@ -6,7 +6,8 @@
   background-color: #fff;
   width: 50rem;
   max-width: 95%;
-  box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+  box-shadow: 7px 7px 15px 0px rgba(25, 32, 23, 0.81);
+  animation: show 500ms ease-in;
 }
 
 .basket-close {
@@ -17,4 +18,15 @@
   cursor: pointer;
   color: #fff;
   font-size: 35px;
+}
+
+@keyframes show {
+  from {
+    top: 70%;
+    opacity: 0;
+  }
+  to {
+    top: 50%;
+    opacity: 1;
+  }
 }
