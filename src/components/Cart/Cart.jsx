@@ -1,10 +1,10 @@
 import './Cart.css'
 
 const Cart = (props) => {
-  const { quantity = 0 } = props
+  const { quantity = 0, handleBasketShow = Function.prototype } = props
 
   return (
-    <button className="cart pink darken-1 white-text">
+    <button className="cart pink darken-1 white-text" onClick={handleBasketShow} >
       <div className="cart-icon">
         <i class="material-icons">shopping_basket</i>
       </div>

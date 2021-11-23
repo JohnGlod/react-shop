@@ -25,6 +25,7 @@ const GoodsItem = (props) => {
             id, 
             name,
             price,
+            full_background, 
           })}>Купить</button>
           <span className="card-price right">{price}</span>
         </div>

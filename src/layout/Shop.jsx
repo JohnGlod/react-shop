@@ -3,12 +3,17 @@ import { API_KEY, API_URL } from '../config';
 import { Preloader } from '../components/Preloader/Preloader';
 import { GoodsList } from '../components/GoodsList/GoodsList'; 
 import { Cart } from '../components/Cart/Cart';
-
+import { BasketList } from '../components/BasketList/BasketList'
 
 const Shop = () => {
   const [goods, setGoods] = useState([]);
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState([]);
+  const [isBasketShow, setBasketShow] = useState(false)
+
+  const handleBasketShow = () => {
+    setBasketShow(!isBasketShow)
+  }
 
   const addTheGoods = (item) => {
 
@@ -52,8 +57,11 @@ const Shop = () => {
 
   return (
     <main className='container content'>
-      <Cart quantity={order.length} addTheGoods={addTheGoods} />
+      <Cart quantity={order.length} addTheGoods={addTheGoods} handleBasketShow={handleBasketShow} />
       {loading ? <Preloader /> : <GoodsList goods={goods} addTheGoods={addTheGoods}/>}
+      {
+        isBasketShow && <BasketList order={order} handleBasketShow={handleBasketShow} /> 
+      }
     </main>
   );
 };
