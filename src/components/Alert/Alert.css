@@ -1,0 +1,15 @@
+#toast-container {
+  top: 1rem;
+  animation: fade-in 350ms ease-in;
+}
+
+@keyframes fade-in {
+  from{
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+  to{
+    transform: translateY(0rem);
+    opacity: 1;
+  }
+}

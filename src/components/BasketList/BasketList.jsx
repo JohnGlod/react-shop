@@ -7,6 +7,8 @@ const BasketList = (props) => {
     order = [],
     handleBasketShow = Function.prototype,
     removeFromBasket = Function.prototype,
+    incQuantity = Function.prototype,
+    decQuantity  = Function.prototype,
   } = props;
 
   const totalPrice = order.reduce(
@@ -25,6 +27,8 @@ const BasketList = (props) => {
           <BasketItem
             key={item.id}
             removeFromBasket={removeFromBasket}
+            decQuantity={decQuantity}
+            incQuantity={incQuantity}
             {...item}
           />
         ))
@@ -32,7 +36,9 @@ const BasketList = (props) => {
         <li className='collection-item'>Корзина пуста</li>
       )}
 
-      <li className='collection-item active'>Итоговая сумма: {totalPrice}</li>
+      <li className='collection-item active'>Итоговая сумма: {totalPrice}
+        <button className="secondary-content btn-small pink darken-1">Оформить заказ</button>
+      </li>
       <i className='material-icons basket-close' onClick={handleBasketShow}>
         close
       </i>

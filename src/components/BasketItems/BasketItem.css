@@ -1,14 +1,18 @@
 .basket-title {
   font-weight: 700;
 }
-.busket-number {
+.busket-descr {
     padding: 1rem 0;
 }
 
-.busket-number__accent{
+.busket-descr__accent{
   font-weight: 700;
 }
 .basket-delete {
   cursor: pointer;
 }
 
+.basket-change {
+  vertical-align: middle;
+  cursor: pointer;
+}

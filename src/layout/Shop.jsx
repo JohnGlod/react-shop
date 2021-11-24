@@ -4,16 +4,49 @@ import { Preloader } from '../components/Preloader/Preloader';
 import { GoodsList } from '../components/GoodsList/GoodsList';
 import { Cart } from '../components/Cart/Cart';
 import { BasketList } from '../components/BasketList/BasketList';
+import { Alert } from '../components/Alert/Alert'
 
 const Shop = () => {
   const [goods, setGoods] = useState([]);
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState([]);
   const [isBasketShow, setBasketShow] = useState(false);
+  const [alertName, setAlertName] = useState('')
 
+  const closeAlert = () => setAlertName('')
+ 
   const handleBasketShow = () => {
     setBasketShow(!isBasketShow);
   };
+
+  const incQuantity = (itemId) => {
+    const newOrder = order.map(el => {
+      if (el.id === itemId) {
+        const newQuantity = el.quantity + 1
+        return {
+          ...el,
+          quantity : newQuantity
+        }
+      }else {
+        return el
+      }
+    })
+    setOrder(newOrder)
+  }
+  const decQuantity = (itemId) => {
+    const newOrder = order.map(el => {
+      if (el.id === itemId) {
+        const newQuantity = el.quantity - 1
+        return {
+          ...el,
+          quantity : newQuantity <= 1 ? 1 : newQuantity
+        }
+      }else{
+          return el
+      }
+    })
+    setOrder(newOrder)
+  }
 
   const addToBasket = (item) => {
     const itemId = order.findIndex((orderItem) => orderItem.id === item.id);
@@ -27,7 +60,6 @@ const Shop = () => {
     } else {
       const newOrder = order.map((orderItem, index) => {
         if (index === itemId) {
-          console.log(`index`, index);
           return {
             ...orderItem,
             quantity: orderItem.quantity + 1,
@@ -38,6 +70,7 @@ const Shop = () => {
       });
       setOrder(newOrder);
     }
+    setAlertName(item.name)
   };
 
   const removeFromBasket = (itemId) => {
@@ -76,8 +109,13 @@ const Shop = () => {
           order={order}
           handleBasketShow={handleBasketShow}
           removeFromBasket={removeFromBasket}
+          decQuantity={decQuantity}
+          incQuantity={incQuantity}
         />
       )}
+      {
+        alertName && <Alert name={alertName} closeAlert={closeAlert}/>
+      }
     </main>
   );
 };

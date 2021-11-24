@@ -19,7 +19,9 @@
   color: #fff;
   font-size: 35px;
 }
-
+.collection .collection-item {
+  padding: 20px;
+}
 @keyframes show {
   from {
     top: 70%;
