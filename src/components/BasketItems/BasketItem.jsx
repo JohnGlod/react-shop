@@ -1,4 +1,6 @@
 import './BasketItem.css';
+import {useContext} from 'react'
+import { ShopContext } from '../../context';
 
 const BasketItem = (props) => {
   const {
@@ -7,10 +9,9 @@ const BasketItem = (props) => {
     price,
     full_background,
     quantity,
-    removeFromBasket = Function.prototype,
-    incQuantity = Function.prototype,
-    decQuantity = Function.prototype,
   } = props;
+
+  const {removeFromBasket, incQuantity, decQuantity} = useContext(ShopContext)
 
   return (
     <li className='collection-item avatar'>

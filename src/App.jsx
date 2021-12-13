@@ -3,11 +3,15 @@ import { Header } from "./layout/Header";
 import { Shop } from "./layout/Shop";
 import { Footer } from "./layout/Footer";
 
+import { ContextProvider } from "./context";
+
 const App = () => {
   return (
     <div className='page'>
       <Header />
-      <Shop />
+      <ContextProvider>
+        <Shop />
+      </ContextProvider>
       <Footer />
     </div>
   );

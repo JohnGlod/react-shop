@@ -7,7 +7,7 @@ const Preloader = () => {
         <div className="circle"></div>
       </div><div className="gap-patch">
         <div className="circle"></div>
-      </div><div classNameName="circle-clipper right">
+      </div><div className="circle-clipper right">
         <div className="circle"></div>
       </div>
     </div>
