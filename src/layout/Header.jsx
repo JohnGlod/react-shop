@@ -11,10 +11,10 @@ const Header = () => {
           </a>
           <ul className='right hide-on-med-and-down'>
             <li>
-              <a href='sass.html'>Repo</a>
+              <a href='https://github.com/JohnGlod'>Repo</a>
             </li>
             <li>
-              <a href='badges.html'>Home</a>
+              <a href='!#'>Home</a>
             </li>
           </ul>
         </div>
@@ -22,10 +22,10 @@ const Header = () => {
 
       <ul className='sidenav' id='mobile-demo'>
         <li>
-          <a href='sass.html'>Repo</a>
+          <a href='https://github.com/JohnGlod'>Repo</a>
         </li>
         <li>
-          <a href='badges.html'>Home</a>
+          <a href='!#'>Home</a>
         </li>
       </ul>
     </header>
